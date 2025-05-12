@@ -11,10 +11,20 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/icon',
     '@nuxt/image',
-    '@pinia/nuxt',
-    '@vercel/speed-insights/nuxt'
+    '@pinia/nuxt'
   ], 
   vite: {
     plugins: [tailwindcss()],
   },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL, 
+      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY, 
+    },
+  },
+  devServer: {
+    host: '0.0.0.0'
+  }, 
+
+  ssr: true
 })

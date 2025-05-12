@@ -1,10 +1,7 @@
-<template>
-  <div>
-    <NuxtLayout />
-    <SpeedInsights /> <!-- 👈 إضافة هنا -->
-  </div>
+<template> 
+    <div>
+      <AppHeader/>
+      <slot />
+      <AppFooter/>
+    </div>
 </template>
-
-<script setup>
-import { SpeedInsights } from "@vercel/speed-insights/nuxt"
-</script>
