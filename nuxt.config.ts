@@ -18,5 +18,11 @@ export default defineNuxtConfig({
   },
   devServer: {
     host: '0.0.0.0'
+  },
+  runtimeConfig: {
+    public: {
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL, 
+      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY, 
+    },
   }, 
 })
