@@ -10,19 +10,19 @@ const items = ref([
   {
     label: 'Services',
     icon: 'i-lucide-box',
-    to: '/services',
+    to: '/',
     active: false,
   },
   {
     label: 'À propos',
     icon: 'i-lucide-users',
-    to: '/a-propos',
+    to: '/',
     active: false,
   },
   {
     label: 'Contactez-nous',
     icon: 'i-lucide-circle-help',
-    to: '/contact',
+    to: '/',
     active: false,
   }
 ])
