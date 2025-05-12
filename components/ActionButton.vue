@@ -1,28 +1,4 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/auth'
-
-const auth = useAuthStore()
-
-const goToLogin = () => {
-  navigateTo('/connexion');
-}
-const goToSignUp = () => {
-  navigateTo('/inscription');
-}
-const handleLogout = async () => {
-  try {
-    await auth.signout()
-    await navigateTo('/');
-  } catch (error) {
-    console.error("Erreur lors de la déconnexion :", error)
-  }
-}
-
-onMounted(async () => {
-  await auth.fetchUser()
-  await auth.fetchUserRName()
-  console.log("User fetched:", auth.user)
-})
 
 </script>
 

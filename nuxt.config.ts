@@ -16,15 +16,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  runtimeConfig: {
-    public: {
-      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL, 
-      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY, 
-    },
-  },
   devServer: {
     host: '0.0.0.0'
   }, 
-
-  ssr: true
 })
