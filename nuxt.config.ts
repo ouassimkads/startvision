@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@pinia/nuxt',
+    '@vercel/speed-insights/nuxt'
   ], 
   vite: {
     plugins: [tailwindcss()],
