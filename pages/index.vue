@@ -1,3 +1,9 @@
+<script setup lang="ts"></script>
 <template>
-    <h1>this is home page for get this is hello page</h1>
+    <div>
+        <HomeHero/>
+        <HomeServiceSection/>
+        <HomeLearnSection/>
+        <HomeContactSection/>
+    </div>
 </template>

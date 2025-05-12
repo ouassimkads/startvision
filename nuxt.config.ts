@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/icon',
     '@nuxt/image',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'nuxt-lucide-icons',
   ], 
   vite: {
     plugins: [tailwindcss()],

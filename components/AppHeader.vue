@@ -1,10 +1,23 @@
-<template>
-  <div class="container mx-auto flex justify-between items-center py-5 px-4">
-    <h1 class="text-2xl font-bold font-[Inter]">STARTVISION</h1>
+<script setup lang="ts">
+const isMenuOpen = ref(false);
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+</script>
 
+<template>
+  <div class="container mx-auto flex justify-between items-center px-2">
+    <NuxtLink to="/">
+      <h1 class="text-2xl font-extrabold font-[Inter]">STARTVISION</h1>
+    </NuxtLink>
+    
+    <!-- Menu in desktop -->
     <DesktopMenu />
+
+
+     <!-- Button of open the menu -->
     <div class="lg:hidden flex items-center">
-      <button @click="toggleMenu" class="text-2xl">
+      <button class="text-2xl" @click="toggleMenu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -27,15 +40,12 @@
       v-if="isMenuOpen"
       class="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg"
     >
+    <!-- Menu in phone -->
       <PhoneMenu />
     </div>
+    
     <ActionButton />
   </div>
 </template>
 
-<script setup lang="ts">
-const isMenuOpen = ref(false);
-const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
-};
-</script>
+
