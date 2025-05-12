@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { DropdownMenuItem } from '@nuxt/ui'
-
+defineProps<{
+  label: string
+}>()
 const items: DropdownMenuItem[] = [
   {
     label: 'Team',
@@ -29,7 +31,7 @@ const items: DropdownMenuItem[] = [
 
 <template>
   <UButtonGroup>
-    <UButton color="neutral" variant="subtle" label="Settings" />
+    <UButton color="neutral" variant="subtle" :label="props.label" />
 
     <UDropdownMenu :items="items">
       <UButton
