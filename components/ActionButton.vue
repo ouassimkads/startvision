@@ -56,7 +56,7 @@ onMounted(async () => {
             tabindex="0"
             class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
           >
-            <li><NuxtLink to="/upload-cv">Upload cv</NuxtLink></li>
+            <li><NuxtLink to="/upload-cv">Télécharger le CV</NuxtLink></li>
             <li class="text-red-600">
               <button @click="handleLogout">Déconnecter</button>
             </li>
@@ -82,9 +82,9 @@ onMounted(async () => {
             class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
           >
             <li>
-              <NuxtLink to="/mes-reservations">mes reservations</NuxtLink>
+              <NuxtLink to="/mes-reservations">Mes reservations</NuxtLink>
             </li>
-            <li><NuxtLink to="/courses_list">liste des cours</NuxtLink></li>
+            <li><NuxtLink to="/courses_list">Liste des cours</NuxtLink></li>
             <li class="text-red-600">
               <button @click="handleLogout">Déconnecter</button>
             </li>

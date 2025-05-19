@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="h-[calc(100vh-130px)] bg-[url(https://i2.ppvise.site/gimg/1d810b5c36.jpg)] bg-cover w-full bg-amber-300"
+      class="h-[calc(100vh-130px)] bg-[url(/services.jpg)] bg-cover w-full bg-amber-300"
     >
       <div class="bg-blue-100/30 h-full w-full place-content-end">
         <h1 class="text-8xl font-extrabold text-white py-8 px-5">
@@ -37,13 +37,6 @@
                 sur les enjeux économiques actuels.
               </p>
             </div>
-            <button
-              class="sm:w-fit w-full px-3.5 py-2 bg-blue-500 hover:bg-blue-700 transition-all duration-700 ease-in-out rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] justify-center items-center flex"
-            >
-              <span class="px-1.5 text-white text-sm font-medium leading-6"
-                >Discutons de votre projet</span
-              >
-            </button>
           </div>
           <img
             class="lg:mx-0 mx-auto h-full rounded-3xl object-cover"
@@ -366,7 +359,7 @@
           </div>
           <img
             class="lg:mx-0 mx-auto h-full rounded-3xl object-cover"
-            src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="/image-service5.jpg"
             alt="about Us image"
           />
         </div>
