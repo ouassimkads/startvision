@@ -38,7 +38,7 @@ const toggleMenu = () => {
     </div>
     <div
       v-if="isMenuOpen"
-      class="lg:hidden absolute top-16 left-0 w-full bg-white shadow-lg"
+      class="lg:hidden absolute top-8 left-0 w-full bg-white shadow-lg z-99"
     >
     <!-- Menu in phone -->
       <PhoneMenu />

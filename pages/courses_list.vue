@@ -43,7 +43,7 @@ const reserveCourse = async () => {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    alert("الرجاء تسجيل الدخول أولاً");
+    alert("Veuillez d'abord vous connecter");
     return;
   }
 
@@ -55,7 +55,7 @@ const reserveCourse = async () => {
     .maybeSingle();
 
   if (existingReservation) {
-    alert("لقد قمت بالحجز مسبقًا في هذه الدورة ✅");
+    alert("J'ai déjà réservé ce cours.");
     return;
   }
 
@@ -69,7 +69,7 @@ const reserveCourse = async () => {
 
   if (insertError) {
     console.error("Erreur lors de la réservation:", insertError.message);
-    alert("حدث خطأ أثناء الحجز");
+    alert("Une erreur s'est produite lors de la réservation");
     return;
   }
 
@@ -113,13 +113,13 @@ const reserveCourse = async () => {
         <h3 class="font-bold text-lg">Confirmer l'inscription</h3>
         <p class="py-4">
           Êtes-vous sûr de vouloir vous inscrire au cours:
-          <strong>{{ selectedCourse?.title }}</strong
-          >؟
+          <strong>{{ selectedCourse?.title }}?</strong
+          >
         </p>
         <div class="modal-action">
-          <button class="btn btn-success" @click="reserveCourse">CONFIRMATION</button>
-          <button class="btn btn-error" @click="showModal = false">
-            annulation
+          <button class="btn btn-success text-white" @click="reserveCourse">CONFIRMATION</button>
+          <button class="btn " @click="showModal = false">
+            ANNULER
           </button>
         </div>
       </div>

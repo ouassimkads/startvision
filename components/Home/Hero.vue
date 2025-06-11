@@ -24,16 +24,18 @@
             color="neutral"
             variant="solid"
             class="text-lg"
-            >Voir tous les services</UButton
           >
+            <NuxtLink to="/services"> Voir tous les services</NuxtLink>
+          </UButton>
           <UButton
             icon="i-lucide-phone"
             size="md"
             color="primary"
             variant="outline"
             class="text-lg bg-blue-600 text-white hover:text-blue-600 border-blue-600 hover:bg-white"
-            >Nous contacter</UButton
           >
+            <NuxtLink to="/contact">Nous contacter</NuxtLink>
+          </UButton>
         </div>
       </div>
 
@@ -86,7 +88,10 @@
             color="neutral"
             variant="solid"
             class="text-lg"
-            >Inscription Entreprise</UButton
+          >
+            <NuxtLink to="/inscription"
+              >Inscription Entreprise</NuxtLink
+            ></UButton
           >
           <UButton
             icon="i-lucide-phone"
@@ -94,7 +99,8 @@
             color="primary"
             variant="outline"
             class="text-lg bg-blue-600 text-white hover:text-blue-600 border-blue-600 hover:bg-white"
-            >Nous contacter</UButton
+          >
+            <NuxtLink to="/contact">Nous contacter</NuxtLink></UButton
           >
         </div>
       </div>

@@ -1,8 +1,11 @@
 <script setup lang="ts">
 
-
-
-const items = ref([
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
+const route = useRoute()
+const items = computed(() => {
+   const currentPath = route.path
+return [
   {
   label: 'Home',
   icon: 'i-lucide-house',
@@ -12,21 +15,34 @@ const items = ref([
     label: 'Services',
     icon: 'i-lucide-box',
     to: '/services',
-    active: false,
+    active: currentPath === '/services',
   },
   {
     label: 'À propos',
     icon: 'i-lucide-users',
     to: '/a-propos',
-    active: false,
+    active: currentPath === '/a-propos',
   },
-  {
+    {
     label: 'Contactez-nous',
     icon: 'i-lucide-circle-help',
     to: '/contact',
-    active: false,
+    active: currentPath === '/contact',
+  },
+  {
+    label: 'Connexion',
+    icon: 'i-lucide-log-in',
+    to: '/connexion',
+    active: currentPath === '/connexion',
+  }, 
+  {
+    label: 'Inscription',
+    icon: 'i-lucide-user-round-plus',
+    to: '/inscription',
+    active: currentPath === '/inscription',
   }
-])
+
+]})
 </script>
 <template>
   <UNavigationMenu orientation="vertical" :items="items" class="w-full" />

@@ -11,7 +11,7 @@
           src="https://plus.unsplash.com/premium_photo-1663134310533-fc3b59225810?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDl8fG1lbiUyMHdvcmt8ZW58MHx8MHx8fDA%3D"
           alt="Signup visual"
           class="h-full w-full object-cover"
-        >
+        />
       </div>
 
       <!-- نموذج التسجيل -->
@@ -105,6 +105,13 @@
             :items="items"
             class="w-full"
           />
+          <USelect
+            v-model="role"
+            value-key="id"
+             size="xl"
+            :items="roleList"
+            class="w-full"
+          />
 
           <button
             type="submit"
@@ -115,22 +122,21 @@
         </form>
 
         <div class="my-4 flex items-center">
-          <hr class="flex-grow border-gray-300" >
+          <hr class="flex-grow border-gray-300" />
           <span class="mx-2 text-sm text-gray-400">or</span>
-          <hr class="flex-grow border-gray-300" >
+          <hr class="flex-grow border-gray-300" />
         </div>
 
         <div class="flex justify-center space-x-4 text-gray-600">
-          <button class="hover:text-black"></button>
-          <button class="hover:text-black">X</button>
-          <button class="hover:text-black">f</button>
-          <button class="hover:text-black">G</button>
+          <button class="hover:text-black"><Facebook /></button>
+          <button class="hover:text-black"><Instagram /></button>
+          <button class="hover:text-black"><Youtube /></button>
         </div>
 
         <p class="text-xs text-center text-gray-500 mt-6">
-          Already signed up?
+          Déjà inscrit ?
           <NuxtLink to="/connexion" class="text-lime-600 hover:underline"
-            >Go to Login</NuxtLink
+            >Accéder à la connexion</NuxtLink
           >
         </p>
       </div>
@@ -139,8 +145,7 @@
 </template>
 
 <script setup>
-
-
+import { Facebook, Instagram, Youtube } from "lucide-vue-next";
 const router = useRouter();
 const firstName = ref("");
 const lastName = ref("");
@@ -151,7 +156,7 @@ const phone = ref("");
 const wilaya = ref("");
 
 const show = ref(false);
-const { $supabase } = useNuxtApp(); 
+const { $supabase } = useNuxtApp();
 
 const items = ref([
   "Adrar",
@@ -213,10 +218,18 @@ const items = ref([
   "El M’Ghair",
   "El Meniaa",
 ]);
-
-
-
-
+const role = ref("user"); // Assuming a default role of 'user'
+const roleList = ref([
+  {
+    label: "Utilisateur",
+    id: "user",
+    active: true,
+  },
+  {
+    label: "Société",
+    id: "company",
+  },
+]);
 const onSubmit = async () => {
   if (!firstName.value || !lastName.value || !email.value || !password.value) {
     alert("Veuillez remplir tous les champs");
@@ -246,7 +259,8 @@ const onSubmit = async () => {
           name: `${firstName.value} ${lastName.value}`,
           email: email.value,
           phone: phone.value,
-          wilaye: wilaya.value
+          wilaye: wilaya.value,
+          role: role.value,
         },
       ]);
 

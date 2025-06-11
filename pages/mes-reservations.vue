@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-
+import { Link } from 'lucide-vue-next';
 const supabase = useNuxtApp().$supabase
 const reservations = ref([])
 const loading = ref(true)
@@ -46,7 +46,7 @@ onMounted(async () => {
       >
         <div class="card-body">
           <h2 class="card-title">{{ reservation.courses.title }}</h2>
-          <p class="text-gray-700">Prix: ${{ reservation.courses.price }}</p>
+          <p class="text-gray-700">Prix: {{ reservation.courses.price }} DZD</p>
           <p class="text-sm text-gray-500">Statut: 
             <span
               :class="reservation.status === 'confirmed' ? 'text-green-600' : 'text-yellow-600'"
@@ -56,7 +56,7 @@ onMounted(async () => {
           </p>
           <div class="mt-4">
             <template v-if="reservation.status === 'confirmed' && reservation.join_url">
-              ✅ <a :href="reservation.join_url" target="_blank" class="link link-primary">Lien de la session</a>
+              <a :href="reservation.join_url" target="_blank" class="link link-primary flex gap-1"><Link /> Lien de la session</a>
             </template>
             <template v-else>
               ⏳ Le lien sera disponible après confirmation.
