@@ -8,7 +8,10 @@ const toggleMenu = () => {
 <template>
   <div class="container mx-auto flex justify-between items-center px-2">
     <NuxtLink to="/">
-      <h1 class="text-2xl font-extrabold font-[Inter]">STARTVISION</h1>
+      <!-- <h1 class="text-2xl text-red-400 font-extrabold font-[Inter]">START<span class="text-green-400 -ml-1">VISION</span></h1> -->
+      <div class="flex items-center h-[60px] overflow-hidden w-[200px]">
+        <img src="../public/logo-startvision.png" alt="logo">
+      </div>
     </NuxtLink>
     
     <!-- Menu in desktop -->
