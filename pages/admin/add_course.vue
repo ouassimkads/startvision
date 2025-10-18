@@ -4,14 +4,14 @@ import { useNuxtApp } from '#app'
 
 const supabase = useNuxtApp().$supabase
 
-// بيانات النموذج
+//Form data
 const title = ref('')
 const description = ref('')
 const startDate = ref('')
 const endDate = ref('')
 const price = ref('')
 
-// حالة التحميل أو الخطأ
+// Loading status or error
 const loading = ref(false)
 const error = ref(null)
 const success = ref(false)
@@ -34,7 +34,7 @@ async function submitCourse() {
         description: description.value,
         start_date: startDate.value,
         end_date: endDate.value,
-        price: price.value || null // إذا كان السعر اختياريًا
+        price: price.value || null //the price is optional
       }
     ])
 
