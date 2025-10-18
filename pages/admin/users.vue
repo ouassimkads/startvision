@@ -5,9 +5,9 @@ const supabase = useNuxtApp().$supabase
 const users = ref([])
 const loading = ref(true)
 const roleMap = {
-  administrateur: 'Administrateur',
-  entreprise: 'Entreprise',
-  utilisateur: 'Utilisateur'
+  admin: 'Administrateur',
+  company: 'Entreprise',
+  user: 'Utilisateur'
 };
 onMounted(async () => {
   loading.value = true
