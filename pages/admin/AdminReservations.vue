@@ -21,7 +21,7 @@
           <td class="border p-2">
             <select v-model="reservation.status" @change="updateStatus(reservation)" class="border p-1">
               <option value="pending">En attente</option>
-              <option value="confirmed">comfermed</option>
+              <option value="confirmed">confirmé</option>
               <option value="canceled">Annulé</option>
             </select>
           </td>

@@ -4,7 +4,11 @@ import { ref, onMounted } from 'vue'
 const supabase = useNuxtApp().$supabase
 const users = ref([])
 const loading = ref(true)
-
+const roleMap = {
+  administrateur: 'Administrateur',
+  entreprise: 'Entreprise',
+  utilisateur: 'Utilisateur'
+};
 onMounted(async () => {
   loading.value = true
 
@@ -43,7 +47,7 @@ onMounted(async () => {
           <td class="border px-4 py-2">{{ user.name }}</td>
           <td class="border px-4 py-2">{{ user.phone }}</td>
           <td class="border px-4 py-2">{{ user.email }}</td>
-          <td class="border px-4 py-2 capitalize">{{ user.role }}</td>
+          <td class="border px-4 py-2 capitalize">{{ roleMap[user.role] || user.role }}</td>
           <td class="border px-4 py-2">
             <span v-if="user.cv_url">
               ✅ <a :href="user.cv_url" target="_blank" class="text-blue-500 underline">Voir</a>

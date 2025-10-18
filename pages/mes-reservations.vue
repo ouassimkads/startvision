@@ -51,7 +51,7 @@ onMounted(async () => {
             <span
               :class="reservation.status === 'confirmed' ? 'text-green-600' : 'text-yellow-600'"
             >
-              {{ reservation.status }}
+              {{ reservation.status === 'confirmed' ? 'Confirmé' : 'En attente' }}
             </span>
           </p>
           <div class="mt-4">
