@@ -230,6 +230,48 @@ const roleList = ref([
     id: "company",
   },
 ]);
+// const onSubmit = async () => {
+//   if (!firstName.value || !lastName.value || !email.value || !password.value) {
+//     alert("Veuillez remplir tous les champs");
+//     return;
+//   }
+
+//   try {
+//     if (typeof email.value !== "string" || typeof password.value !== "string") {
+//       throw new Error(
+//         "Email et mot de passe doivent être des chaînes de caractères"
+//       );
+//     }
+
+//     const { data, error } = await $supabase.auth.signUp({
+//       email: email.value,
+//       password: password.value,
+//     });
+//     if (error) throw error;
+//     const userId = data?.user?.id;
+
+//     // eslint-disable-next-line @typescript-eslint/no-unused-vars
+//     const { data: userInsertData, error: insertError } = await $supabase
+//       .from("users")
+//       .insert([
+//         {
+//           auth_id: userId,
+//           name: `${firstName.value} ${lastName.value}`,
+//           email: email.value,
+//           phone: phone.value,
+//           wilaye: wilaya.value,
+//           role: role.value,
+//         },
+//       ]);
+
+//     if (insertError) throw insertError;
+
+//     router.push("/");
+//   } catch (error) {
+//     alert("Erreur lors de l'inscription: " + error.message);
+//   }
+// };
+
 const onSubmit = async () => {
   if (!firstName.value || !lastName.value || !email.value || !password.value) {
     alert("Veuillez remplir tous les champs");
@@ -237,38 +279,47 @@ const onSubmit = async () => {
   }
 
   try {
-    if (typeof email.value !== "string" || typeof password.value !== "string") {
-      throw new Error(
-        "Email et mot de passe doivent être des chaînes de caractères"
-      );
-    }
-
     const { data, error } = await $supabase.auth.signUp({
       email: email.value,
       password: password.value,
     });
+
     if (error) throw error;
-    const userId = data?.user?.id;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { data: userInsertData, error: insertError } = await $supabase
+    const userId = data.user?.id;
+
+    // إضافة المستخدم في جدول users
+    const { error: insertError } = await $supabase
       .from("users")
-      .insert([
-        {
-          auth_id: userId,
-          name: `${firstName.value} ${lastName.value}`,
-          email: email.value,
-          phone: phone.value,
-          wilaye: wilaya.value,
-          role: role.value,
-        },
-      ]);
-
+      .insert([{
+        auth_id: userId,
+        name: `${firstName.value} ${lastName.value}`,
+        email: email.value,
+        phone: phone.value,
+        wilaye: wilaya.value,
+        role: role.value,
+      }]);
     if (insertError) throw insertError;
 
-    router.push("/");
+    // تسجيل الدخول مباشرة بعد signup
+    const { data: loginData, error: loginError } = await $supabase.auth.signInWithPassword({
+      email: email.value,
+      password: password.value,
+    });
+    if (loginError) throw loginError;
+
+    // تحديث الـ store مباشرة بعد login
+    const auth = useAuthStore();
+    await auth.fetchUser();
+    await auth.fetchUserRole();
+    await auth.fetchUserRName();
+
+    // التوجيه للصفحة الرئيسية
+    navigateTo("/");
+
   } catch (error) {
     alert("Erreur lors de l'inscription: " + error.message);
   }
 };
+
 </script>

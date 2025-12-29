@@ -2,13 +2,13 @@
 import { defineStore } from "pinia";
 import { useNuxtApp } from "#app";
 
-export const useAuthStore = defineStore("auth", {
+export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: null,
     role: null,
     session: null,
     loading: true,
-    userName: null
+    userName: null,
   }),
 
   actions: {
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore("auth", {
 
         return data;
       } catch (err) {
-        console.error("Error logging in:", err.message);
+        console.error('Error logging in:', err.message);
         throw err;
       } finally {
         this.loading = false; // تعيين التحميل إلى false بعد الانتهاء
@@ -54,7 +54,7 @@ export const useAuthStore = defineStore("auth", {
         this.session = data.session;
         return data;
       } catch (err) {
-        console.error("Error signing up:", err.message);
+        console.error('Error signing up:', err.message);
         throw err;
       } finally {
         this.loading = false; // تعيين التحميل إلى false بعد الانتهاء
@@ -68,7 +68,7 @@ export const useAuthStore = defineStore("auth", {
       const router = useRouter();
       try {
         const { error } = await $supabase.auth.signOut();
-        router.push("/");
+        router.push('/');
         if (error) {
           throw error;
         }
@@ -76,7 +76,7 @@ export const useAuthStore = defineStore("auth", {
         this.session = null;
         return true;
       } catch (err) {
-        console.error("Error signing out:", err.message);
+        console.error('Error signing out:', err.message);
         throw err;
       } finally {
         this.loading = false; // تعيين التحميل إلى false بعد الانتهاء
@@ -85,99 +85,98 @@ export const useAuthStore = defineStore("auth", {
 
     // fetch user data
     async fetchUser() {
-      this.loading = true
-      const { $supabase } = useNuxtApp()
-    
+      this.loading = true;
+      const { $supabase } = useNuxtApp();
+
       try {
         if (import.meta.client) {
           // محاولة الحصول على الجلسة المخزنة في المتصفح
           const { data: sessionData, error: sessionError } =
-            await $supabase.auth.getSession()
-    
+            await $supabase.auth.getSession();
+
           if (sessionError || !sessionData.session) {
-            this.user = null
-            this.session = null
-            this.role = null
-            return null
+            this.user = null;
+            this.session = null;
+            this.role = null;
+            return null;
           }
-    
+
           // إذا كانت الجلسة موجودة، استرجاع بيانات المستخدم
-          const { data: userData, error: userError } = await $supabase.auth.getUser()
-          if (userError) throw userError
-    
-          this.user = userData.user
-          this.session = sessionData.session
-    
+          const { data: userData, error: userError } =
+            await $supabase.auth.getUser();
+          if (userError) throw userError;
+
+          this.user = userData.user;
+          this.session = sessionData.session;
+
           // جلب الدور بعد التأكد من الجلسة
-          await this.fetchUserRole()
-          console.log("User ID:", this.user?.id);
-          return userData
+          await this.fetchUserRole();
+          console.log('User ID:', this.user?.id);
+          return userData;
         }
       } catch (err) {
-        console.error('Error fetching user:', err.message)
-        return null
+        console.error('Error fetching user:', err.message);
+        return null;
       } finally {
-        this.loading = false
+        this.loading = false;
       }
     },
-    
-    
-    
+
     // دالة لجلب role المستخدم من جدول 'users'
     async fetchUserRole() {
-      const { $supabase } = useNuxtApp()
-    
+      const { $supabase } = useNuxtApp();
+
       try {
         if (!this.user || !this.user.id) {
-          throw new Error('User not found')
+          throw new Error('User not found');
         }
-    
+
         const { data: userRoleData, error: userRoleError } = await $supabase
           .from('users')
           .select('role')
           .eq('auth_id', this.user.id) // أو .eq('id', this.user.id) حسب الحقل في جدولك
-          .single()
-    
+          .single();
+
         if (userRoleError) {
-          throw userRoleError
+          throw userRoleError;
         }
-    
-        this.role = userRoleData?.role
-        return this.role
+
+        this.role = userRoleData?.role;
+        return this.role;
       } catch (err) {
-        console.error('Error fetching user role:', err.message)
-        this.role = null
-        return null
+        console.error('Error fetching user role:', err.message);
+        this.role = null;
+        return null;
       }
-    }, 
-        // دالة لجلب role المستخدم من جدول 'users'
+    },
+    // دالة لجلب role المستخدم من جدول 'users'
     async fetchUserRName() {
-          const { $supabase } = useNuxtApp()
-        
-          try {
-            if (!this.user || !this.user.id) {
-              throw new Error('User not found')
-            }
-        
-            const { data: userNameData, error: userNameError } = await $supabase
-              .from('users')
-              .select('name')
-              .eq('auth_id', this.user.id) // أو .eq('id', this.user.id) حسب الحقل في جدولك
-              .single()
-        
-            if (userNameError) {
-              throw userNameError
-            }
-        
-            this.userName = userNameData?.name
-            return this.role
-          } catch (err) {
-            console.error('Error fetching user role:', err.message)
-            this.role = null
-            return null
-          }
-     }, 
-    
+      const { $supabase } = useNuxtApp();
+
+      try {
+        if (!this.user || !this.user.id) {
+          throw new Error('User not found');
+        }
+
+        const { data: userNameData, error: userNameError } = await $supabase
+          .from('users')
+          .select('name')
+          .eq('auth_id', this.user.id) // أو .eq('id', this.user.id) حسب الحقل في جدولك
+          .single();
+
+        if (userNameError) {
+          throw userNameError;
+        }
+
+        this.userName = userNameData?.name;
+        return this.role;
+      } catch (err) {
+        console.error('Error fetching user role:', err.message);
+        this.role = null;
+        return null;
+      }
+    },
+
     async fetchSession() {
       const { $supabase } = useNuxtApp();
 
@@ -194,7 +193,8 @@ export const useAuthStore = defineStore("auth", {
         }
 
         // إذا كانت الجلسة موجودة، استرجاع بيانات المستخدم
-        const { data: userData, error: userError } = await $supabase.auth.getUser();
+        const { data: userData, error: userError } =
+          await $supabase.auth.getUser();
         if (userError) throw userError;
 
         this.user = userData.user;
@@ -217,7 +217,7 @@ export const useAuthStore = defineStore("auth", {
           .from('users')
           .update({
             name: profile.username,
-            phone: profile.phone
+            phone: profile.phone,
           })
           .eq('auth_id', userId);
 
@@ -229,7 +229,94 @@ export const useAuthStore = defineStore("auth", {
         console.error('Erreur lors de la mise à jour du profil:', err.message);
         throw err;
       }
-    }, 
+    },
+    // async initAuthListener() {
+    //   const { $supabase } = useNuxtApp();
+
+    //   // جلب session الحالية عند تحميل التطبيق
+    //   const { data } = await $supabase.auth.getSession();
+    //   this.session = data.session;
+    //   this.user = data.session?.user ?? null;
+
+    //   if (this.user) {
+    //     await this.fetchUserRole();
+    //     await this.fetchUserRName();
+    //   }
+
+    //   // 🔥 الاستماع لأي تغيير (signup / login / logout)
+    //   $supabase.auth.onAuthStateChange(async (_event, session) => {
+    //     this.session = session;
+    //     this.user = session?.user ?? null;
+
+    //     if (this.user) {
+    //       await this.fetchUserRole();
+    //       await this.fetchUserRName();
+    //     } else {
+    //       this.role = null;
+    //       this.userName = null;
+    //     }
+    //   });
+
+    //   this.loading = false;
+    // },
+    async initAuthListener() {
+      const { $supabase } = useNuxtApp();
+
+      // تنفيذ فقط على العميل
+      if (!import.meta.client) return;
+
+      this.loading = true;
+
+      try {
+        // جلب session الحالية عند تحميل التطبيق
+        const { data: sessionData, error: sessionError } =
+          await $supabase.auth.getSession();
+
+        if (sessionError) throw sessionError;
+
+        this.session = sessionData.session ?? null;
+        this.user = sessionData.session?.user ?? null;
+
+        if (this.user) {
+          await this.fetchUserRole();
+          await this.fetchUserRName();
+        }
+
+        // 🔥 الاستماع لأي تغيير (signup / login / logout)
+        // $supabase.auth.onAuthStateChange(async (_event, session) => {
+        //   this.session = session ?? null;
+        //   this.user = session?.user ?? null;
+
+        //   if (this.user) {
+        //     await this.fetchUserRole();
+        //     await this.fetchUserRName();
+        //   } else {
+        //     this.role = null;
+        //     this.userName = null;
+        //   }
+        // });
+        $supabase.auth.onAuthStateChange(async (_event, session) => {
+          this.session = session ?? null;
+          this.user = session?.user ?? null;
+
+          if (this.user) {
+            await this.fetchUserRole();
+            await this.fetchUserRName();
+          } else {
+            this.role = null;
+            this.userName = null;
+          }
+        });
+
+      } catch (err: any) {
+        console.error('Error initializing auth listener:', err.message);
+        this.user = null;
+        this.session = null;
+        this.role = null;
+        this.userName = null;
+      } finally {
+        this.loading = false;
+      }
+    },
   },
-  
 });
